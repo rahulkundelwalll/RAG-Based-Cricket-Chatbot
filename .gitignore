@@ -1,0 +1,54 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore virtual environments
+myenv/
+venv/
+.env/
+*.venv
+
+# Ignore environment files
+.env
+*.env
+*.secret
+config/settings_local.py
+
+# Ignore dependency files
+Pipfile
+Pipfile.lock
+poetry.lock
+requirements.txt
+
+# Ignore compiled files
+*.so
+*.dll
+*.dylib
+
+# Ignore logs and temporary files
+logs/
+*.log
+nohup.out
+debug.log
+
+# Ignore database files
+*.sqlite3
+db.sqlite3
+
+# Ignore Django migrations
+*/migrations/*.py
+*/migrations/*.pyc
+
+# Ignore Flask instance folder
+instance/
+
+# Ignore static and media files
+staticfiles/
+media/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore MacOS system files
+.DS_Store
