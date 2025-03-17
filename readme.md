@@ -91,13 +91,23 @@ RETRIEVAL_THRESHOLD = 0.3  # Adjust based on performance needs
 ## Project Structure
 
 ```
+BBC_scrap/
+│-- webScrape.py          # scrap 800 pages from website
+BBC_scrap/
+│-- data.text            # scrap data into txt
+db/                      # chunks
 RAG_Pipeline/
 │-- server.py            # Main server to handle user interactions
 │-- Split_data_in_chunk  # Splits data into chunks
 │-- ChromaDBRetriber.py  # Stores data into ChromaDB
 │-- Rag.py               # Retrieves data and feeds it to the LLM
-│-- config.py            # Stores API keys and threshold settings
-│-- evaluation.py        # Evaluates chatbot responses
+RAG_Pipeline/
+│-- server.py            # Main server to handle user interactions
+│-- Split_data_in_chunk  # Splits data into chunks
+│-- ChromaDBRetriber.py  # Stores data into ChromaDB
+│-- Rag.py               # Retrieves data and feeds it to the LLM
+Test_with_Ragas/
+│-- test.py              #evaluation      
 ```
 
 ---
