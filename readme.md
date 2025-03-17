@@ -52,24 +52,29 @@ LLaMA 3 (Large Language Model Meta AI) is an advanced open-weight transformer-ba
 The chatbot follows these key steps:
 
 ### 1. **User Query Processing**
-   - The user enters a query related to cricket.
-   - The query undergoes preprocessing (text normalization, tokenization, etc.).
+
+- The user enters a query related to cricket.
+- The query undergoes preprocessing (text normalization, tokenization, etc.).
 
 ### 2. **Retrieval Phase**
-   - The query is converted into an embedding using **all-MiniLM-L6-v2**.
-   - A similarity search is performed in the document store (ChromaDB) to fetch relevant cricket-related information.
+
+- The query is converted into an embedding using **all-MiniLM-L6-v2**.
+- A similarity search is performed in the document store (ChromaDB) to fetch relevant cricket-related information.
 
 ### 3. **Augmentation Phase**
-   - The retrieved data is formatted and combined with the original query.
-   - The augmented query is sent to **Ollama LLaMA 3** for processing.
+
+- The retrieved data is formatted and combined with the original query.
+- The augmented query is sent to **Ollama LLaMA 3** for processing.
 
 ### 4. **Response Generation**
-   - LLaMA 3 generates a response using both retrieved data and its internal knowledge.
-   - The response undergoes post-processing before being sent to the user.
+
+- LLaMA 3 generates a response using both retrieved data and its internal knowledge.
+- The response undergoes post-processing before being sent to the user.
 
 ### 5. **Threshold Tuning**
-   - A similarity threshold is used to determine if retrieved information is relevant.
-   - If the similarity score is below the threshold, fallback mechanisms are triggered.
+
+- A similarity threshold is used to determine if retrieved information is relevant.
+- If the similarity score is below the threshold, fallback mechanisms are triggered.
 
 ---
 
@@ -91,13 +96,23 @@ RETRIEVAL_THRESHOLD = 0.3  # Adjust based on performance needs
 ## Project Structure
 
 ```
+BBC_scrap/
+│-- webScrape.py          # scrap 800 pages from website
+BBC_scrap/
+│-- data.text            # scrap data into txt
+db/                      # chunks
 RAG_Pipeline/
 │-- server.py            # Main server to handle user interactions
 │-- Split_data_in_chunk  # Splits data into chunks
 │-- ChromaDBRetriber.py  # Stores data into ChromaDB
 │-- Rag.py               # Retrieves data and feeds it to the LLM
-│-- config.py            # Stores API keys and threshold settings
-│-- evaluation.py        # Evaluates chatbot responses
+RAG_Pipeline/
+│-- server.py            # Main server to handle user interactions
+│-- Split_data_in_chunk  # Splits data into chunks
+│-- ChromaDBRetriber.py  # Stores data into ChromaDB
+│-- Rag.py               # Retrieves data and feeds it to the LLM
+Test_with_Ragas/
+│-- test.py              #evaluation
 ```
 
 ---
@@ -164,11 +179,11 @@ python Test_with_Ragas/server.py
 
 ### **Evaluation Metrics:**
 
-| Metric                | Definition |
-|----------------------|--------------------------------|
-| **Faithfulness**   | Measures cosine similarity between the chatbot’s response and the ground truth. |
-| **Context Recall** | Measures similarity between ground truth and response. |
-| **Context Precision** | Uses ROUGE-1 F1 to measure overlap. |
+| Metric                | Definition                                                                      |
+| --------------------- | ------------------------------------------------------------------------------- |
+| **Faithfulness**      | Measures cosine similarity between the chatbot’s response and the ground truth. |
+| **Context Recall**    | Measures similarity between ground truth and response.                          |
+| **Context Precision** | Uses ROUGE-1 F1 to measure overlap.                                             |
 
 Example output:
 
@@ -195,4 +210,3 @@ Results are saved in `evaluated_results.csv`.
 ## Conclusion
 
 This RAG-based cricket chatbot effectively combines retrieval and generative AI techniques to provide **accurate** and **contextually relevant** responses. By fine-tuning the retrieval threshold, expanding the knowledge base, and refining prompt engineering, the chatbot can be further optimized for **better performance**.
-
