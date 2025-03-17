@@ -111,8 +111,8 @@ RAG_Pipeline/
 │-- Split_data_in_chunk  # Splits data into chunks
 │-- ChromaDBRetriber.py  # Stores data into ChromaDB
 │-- Rag.py               # Retrieves data and feeds it to the LLM
-│-- config.py            # Stores API keys and threshold settings
-│-- evaluation.py        # Evaluates chatbot responses
+Test_with_Ragas/
+│-- test.py              #evaluation
 ```
 
 ---
