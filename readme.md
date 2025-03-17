@@ -155,6 +155,10 @@ python RAG_Pipeline/server.py
 The chatbot will be available at `http://localhost:5000` (or the configured port).
 
 ---
+![Alt text](image/a.png)
+![Alt text](image/b.png)
+
+
 
 ## Customization
 
