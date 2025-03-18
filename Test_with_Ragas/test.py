@@ -10,9 +10,9 @@ class RAGEvaluator:
         if self.df.shape[1] < 3:
             raise ValueError("CSV file must contain at least 3 columns: Question, RAG Response, Ground Truth.")
         
-        self.questions = self.df.iloc[:, 0].tolist()
-        self.responses = self.df.iloc[:, 1].tolist()
-        self.ground_truths = self.df.iloc[:, 2].tolist()
+        self.questions = self.df.iloc[:, 0].tolist()  # Context or retrieved passage
+        self.responses = self.df.iloc[:, 1].tolist()  # RAG-generated response
+        self.ground_truths = self.df.iloc[:, 2].tolist()  # Reference answer
         
         self.embedding_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
         self.rouge_scorer = rouge_scorer.RougeScorer(['rouge1', 'rougeL'], use_stemmer=True)
@@ -28,14 +28,19 @@ class RAGEvaluator:
     
     def rouge_score(self, predicted, reference):
         scores = self.rouge_scorer.score(predicted, reference)
-        return scores['rouge1'].fmeasure
+        return scores['rouge1'].fmeasure  # ROUGE-1 F1 score
     
     def evaluate(self):
         for question, response, ground_truth in zip(self.questions, self.responses, self.ground_truths):
-            faithfulness = self.cosine_similarity(response, ground_truth)
-            recall = self.cosine_similarity(ground_truth, response)
-            precision = self.rouge_score(response, ground_truth)
-            
+            # Faithfulness: How much the generated response aligns with retrieved context
+            faithfulness = self.cosine_similarity(response, question)  
+
+            # Context Recall: How much of the retrieved context is used in the generated response
+            recall = self.cosine_similarity(question, response)  
+
+            # Context Precision: ROUGE Score (Alternatively, cosine similarity can be used)
+            precision = self.rouge_score(response, question)  
+
             self.faithfulness_scores.append(faithfulness)
             self.context_recall_scores.append(recall)
             self.context_precision_scores.append(precision)
