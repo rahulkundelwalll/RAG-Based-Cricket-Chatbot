@@ -141,6 +141,11 @@ cd criket_news_chatbot
 ```bash
 pip install -r requirements.txt
 ```
+### 2. Install OLLAMA and pull model:
+
+```bash
+ollama pull llama3
+```
 
 ---
 
